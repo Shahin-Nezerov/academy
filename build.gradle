@@ -12,26 +12,32 @@ buildscript {
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
+apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 
-group = 'pro.nazarov'
-version = '0.0.1-SNAPSHOT'
+jar {
+	baseName = 'gs-multi-module-library'
+	version = '0.0.1-SNAPSHOT'
+}
+
+group = 'pro.nazarov.shaheen'
+version = '1.0.0-SNAPSHOT'
 sourceCompatibility = 1.8
 
 repositories {
 	mavenCentral()
 }
 
-
 dependencies {
-	compile('org.springframework.boot:spring-boot-starter-data-jpa')
-	compile('org.springframework.boot:spring-boot-starter-data-rest')
-	compile("org.springframework.data:spring-data-rest-webmvc")
+	compile('org.springframework.boot:spring-boot-starter-jetty')
+	compile('org.springframework.boot:spring-boot-starter-web')
 	compile("org.springframework.boot:spring-boot-devtools")
-	compile ("com.zaxxer:HikariCP:2.3.2")
-	compile group: 'org.hibernate', name: 'hibernate-ehcache', version: '5.2.12.Final'
-	compile group: 'net.sf.ehcache', name: 'ehcache-core', version: '2.4.6'
-	compile('pro.nazarov:utility:1.0.4')
-	runtime('mysql:mysql-connector-java')
+	compile group: 'org.webjars', name: 'bootstrap', version: '4.0.0'
+	compile project(':rest-api')
+	compile project(':database')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+
+task wrapper(type: Wrapper) {
+	gradleVersion = '4.6' //version required
 }

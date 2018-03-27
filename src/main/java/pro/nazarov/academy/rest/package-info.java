@@ -1,1 +1,0 @@
-package pro.nazarov.academy.rest;
